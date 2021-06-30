@@ -20,8 +20,8 @@ class Rent(commands.Cog):
         self.rent = self.db.find_one({"description": "rent"})['rent']
         self.time = self.db.find_one({"description": "rent"})['rent_time']
 
-    #A function to register the rent of a beaglebone black for 12 hours
-    @commands.command(brief='Uma função para alugar a beaglebone black de maíra canal (gerente do alto nível)'
+    #A function to register the rent of a beaglebone black for 2 hours
+    @commands.command(brief='Uma função para alugar a beaglebone black de maíra canal (gerente do alto nível)',
             help='Use o comando >alugar para ter acesso irrestrito durante doze horas a uma beaglebone black, caso alguém já esteja de posse dela você será avisado/avisada',
             aliases=['aluguel','beaglebone','aluga'])
     async def alugar(self, ctx):
@@ -37,7 +37,7 @@ class Rent(commands.Cog):
             await ctx.send(f'A beaglebone já foi alugada por <@`{self.rent}`>, entre em contato com ela/ele ou aguarde o tempo de devolução')
         await reactToMessage(self.bot, ctx.message, [MESSAGE_EMOJI])
 
-    #A function to return the beaglebone black before 12 hours of usage
+    #A function to return the beaglebone black before 2 hours of usage
     @commands.command(brief='Uma função para devolver a beagleboneblack caso ja tenha sido alugada',
             help='Use o comando devolver só quando estiver empossado/empossada da beagleboneblack a fim de devolver ela para o grupo',
             aliases=['devolução','desalugar','desaluga','aluga','beaglebone'])
@@ -46,7 +46,7 @@ class Rent(commands.Cog):
 
         print(f '\n [*] \'>devolver\' command called.')
 
-        if ctx.message.author != self.rent:
+        if ctx.message.author.id != self.rent:
             await ctx.send(f'Você não está de posse da beaglebone, alugue usando `>alugar` caso ela esteja livre')
         else:
             self.db.update({"description": "rent"}, {"$set":{"rent": None}})
@@ -56,7 +56,7 @@ class Rent(commands.Cog):
 
     @tasks.loop(minutes=10)
     async def time_expired(self):
-        if time.time()/3600 - self.time >= 12:
+        if time.time()/3600 - self.time >= 2:
             txt = (f'O tempo de uso da beaglebone expirou <@`{self.rent}`>, alugue-a novamente caso não existam solicitações de aluguel anteriores')
             channel = await self.bot.fetch_channel(CHANNEL_ID)
             await channel.send(context=txt)
