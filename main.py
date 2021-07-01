@@ -65,57 +65,56 @@ async def on_member_join(member):
     await reactToResponse(bot, response)
 
 # Whenever a new message is sent to a channel the bot has access to
-@bot.event
-async def on_message(message):
-    if message.author == bot.user: return
+# @bot.event
+# async def on_message(message):
+#     if message.author == bot.user: return
 
-    currSheet = triggerSheet
-    messageLog = "Trigger"
-    messageName = "TRIGGER"
-    messageAliases = "TRIGGER ALIASES"
+#     currSheet = triggerSheet
+#     messageLog = "Trigger"
+#     messageName = "TRIGGER"
+#     messageAliases = "TRIGGER ALIASES"
 
-    if message.content.startswith(">") :
+#     if message.content.startswith(">") :
         
-        currSheet = commandSheet
-        messageLog = "Command"
-        messageName = "COMMAND NAME"
-        messageAliases = "COMMAND ALIASES"
-        message.content = message.content[1:]
-    # Checks for all triggers listed in the spreadsheet
+#         currSheet = commandSheet
+#         messageLog = "Command"
+#         messageName = "COMMAND NAME"
+#         messageAliases = "COMMAND ALIASES"
+#         message.content = message.content[1:]
+#     # Checks for all triggers listed in the spreadsheet
 
-    for element in currSheet:
-        
-        compareOptions = element[messageAliases]
-        compareOptions = compareOptions.split('\n') if compareOptions != '' else []
-        compareOptions.append(element[messageName])
-        print(compareOptions)
+#     for element in currSheet:
 
-        if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
-            print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
+#         compareOptions = element[messageAliases]
+#         compareOptions = compareOptions.split('\n') if compareOptions != '' else []
+#         compareOptions.append(element[messageName])
 
-            await reactToMessage(bot, message, [MESSAGE_EMOJI])
+#         if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
+#             print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
 
-            # gets image attatchment
-            img = getImage(element["RESPONSE IMAGE"])
+#             await reactToMessage(bot, message, [MESSAGE_EMOJI])
 
-            # activates text-to-speech if specified
-            tts = 'True' if element['TTS'] == 'TRUE' else 'False'
+#             # gets image attatchment
+#             img = getImage(element["RESPONSE IMAGE"])
 
-            # If an image link was specified
-            if img: 
-                response = await message.channel.send(content=element["RESPONSE TEXT"], file=discord.File(img), tts=tts)
-                os.remove(img) # Deletes the image from local directory
+#             # activates text-to-speech if specified
+#             tts = 'True' if element['TTS'] == 'TRUE' else 'False'
 
-            else:
-                response = await message.channel.send(content=element["RESPONSE TEXT"], tts=tts)
+#             # If an image link was specified
+#             if img: 
+#                 response = await message.channel.send(content=element["RESPONSE TEXT"], file=discord.File(img), tts=tts)
+#                 os.remove(img) # Deletes the image from local directory
 
-            print("   [**] The response was successfully sent.")
+#             else:
+#                 response = await message.channel.send(content=element["RESPONSE TEXT"], tts=tts)
 
-            await reactToResponse(bot, response)
+#             print("   [**] The response was successfully sent.")
 
-            return
+#             await reactToResponse(bot, response)
 
-    await bot.process_commands(message)
+#             return
+
+#     await bot.process_commands(message)
 
 # Bot's developer
 @bot.command(brief='Desenvolvedor do bot e repositório no GitHub.', aliases=['créditos', 'creditos', 'dev'])
@@ -249,5 +248,5 @@ async def periodicRefresh():
 
 
 if __name__ == '__main__':
-    refreshCogs(bot, commandSheet, hasLoaded=False)
+    #refreshCogs(bot, commandSheet, hasLoaded=False)
     bot.run(DISCORD_TOKEN)
