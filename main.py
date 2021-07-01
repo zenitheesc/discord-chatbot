@@ -80,8 +80,7 @@ async def on_message(message):
         messageLog = "Command"
         messageName = "COMMAND NAME"
         messagAliases = "COMMAND ALIASES"
-        message.content.remove(message.content[0])
-
+        message.content[1:]
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
