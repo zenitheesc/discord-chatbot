@@ -26,7 +26,7 @@ VOCATIVES = [ # list of vocatives that'll be used on the welcome message for new
     'querido', 'barbeiro', 'zé', 'filho'
 ]
 
-async def reactToResponse(response, emojiList = []):
+async def reactToResponse(bot, response, emojiList = []):
     if not emojiList: emojiList = []
 
     emojiList.insert(0, RESPONSE_EMOJI)
@@ -38,7 +38,7 @@ async def reactToResponse(response, emojiList = []):
         else:
             print(f"   [**] The reaction {emoji} was successfully added to the response.")
 
-async def reactToMessage(message, emojiList: list):
+async def reactToMessage(bot, message, emojiList: list):
     for emoji in emojiList:
         try:
             await message.add_reaction(emoji)
