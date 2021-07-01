@@ -68,11 +68,16 @@ async def on_member_join(member):
 @bot.event
 async def on_message(message):
     if message.author == bot.user: return
-
+    currSheet = commandSheet if(message.content.startsWith(">")) else triggerSheet
+    messageLog = "Command" if(message.content.startsWith(">")) else "Trigger"
+    messageName = "COMMAND NAME" if(message.content.startsWith(">")) else "TRIGGER"
+    messagAliases = "COMMAND ALIASES" if(message.content.startsWith(">")) else "TRIGGER ALIASES"
     # Checks for all triggers listed in the spreadsheet
-    for element in triggerSheet:
-        if message.content and message.content.lower() in filter(lambda e: e, str(element["TRIGGER"]).split('\n')):
-            print(f"\n [*] Trigger: '{message.content}', by {message.author.display_name}.")
+
+    for element in currSheet:
+        compareOptions = (str(element[messagAliases]).split('\n')).push(element[messageName])
+        if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
+            print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
 
             await reactToMessage(bot, message, [MESSAGE_EMOJI])
 

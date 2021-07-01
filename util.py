@@ -156,7 +156,7 @@ def refreshCogs(bot, cogSheet: list, hasLoaded=True):
     # List of all bot commands
     commands = [c.name for c in bot.commands] + reduce(lambda acc, cur: acc + [s for s in cur], [c.aliases for c in bot.commands], [])
 
-    writeCogs(cogSheet, commands)
+    #writeCogs(cogSheet, commands)
 
     # Loads all cogs
     for filename in os.listdir('./cogs'):
