@@ -249,5 +249,5 @@ async def periodicRefresh():
 
 
 if __name__ == '__main__':
-    #refreshCogs(bot, commandSheet, hasLoaded=False)
+    refreshCogs(bot, commandSheet, hasLoaded=False)
     bot.run(DISCORD_TOKEN)
