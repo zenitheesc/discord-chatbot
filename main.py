@@ -80,14 +80,14 @@ async def on_message(message):
         messageLog = "Command"
         messageName = "COMMAND NAME"
         messageAliases = "COMMAND ALIASES"
-        message.content[1:]
+        message.content = message.content[1:]
         print("é comando")
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
         
-        compareOptions = str(element[messageAliases])
-        compareOptions = compareOptions.split('\n')
+        compareOptions = element[messageAliases]
+        compareOptions = compareOptions.split('\n') if compareOptions == '' else []
         compareOptions.append(element[messageName])
         print("comando", message.content)
         print("existe", message.content and message.content.lower() in filter(lambda e: e, compareOptions))
