@@ -65,56 +65,56 @@ async def on_member_join(member):
     await reactToResponse(bot, response)
 
 # Whenever a new message is sent to a channel the bot has access to
-# @bot.event
-# async def on_message(message):
-#     if message.author == bot.user: return
+@bot.event
+async def on_message(message):
+    if message.author == bot.user: return
 
-#     currSheet = triggerSheet
-#     messageLog = "Trigger"
-#     messageName = "TRIGGER"
-#     messageAliases = "TRIGGER ALIASES"
+    currSheet = triggerSheet
+    messageLog = "Trigger"
+    messageName = "TRIGGER"
+    messageAliases = "TRIGGER ALIASES"
 
-#     if message.content.startswith(">") :
+    if message.content.startswith(">") :
         
-#         currSheet = commandSheet
-#         messageLog = "Command"
-#         messageName = "COMMAND NAME"
-#         messageAliases = "COMMAND ALIASES"
-#         message.content = message.content[1:]
-#     # Checks for all triggers listed in the spreadsheet
+        currSheet = commandSheet
+        messageLog = "Command"
+        messageName = "COMMAND NAME"
+        messageAliases = "COMMAND ALIASES"
+        #message.content = message.content[1:]
+    # Checks for all triggers listed in the spreadsheet
 
-#     for element in currSheet:
+    for element in currSheet:
 
-#         compareOptions = element[messageAliases]
-#         compareOptions = compareOptions.split('\n') if compareOptions != '' else []
-#         compareOptions.append(element[messageName])
+        compareOptions = element[messageAliases]
+        compareOptions = compareOptions.split('\n') if compareOptions != '' else []
+        compareOptions.append(element[messageName])
 
-#         if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
-#             print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
+        if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
+            print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
 
-#             await reactToMessage(bot, message, [MESSAGE_EMOJI])
+            await reactToMessage(bot, message, [MESSAGE_EMOJI])
 
-#             # gets image attatchment
-#             img = getImage(element["RESPONSE IMAGE"])
+            # gets image attatchment
+            img = getImage(element["RESPONSE IMAGE"])
 
-#             # activates text-to-speech if specified
-#             tts = 'True' if element['TTS'] == 'TRUE' else 'False'
+            # activates text-to-speech if specified
+            tts = 'True' if element['TTS'] == 'TRUE' else 'False'
 
-#             # If an image link was specified
-#             if img: 
-#                 response = await message.channel.send(content=element["RESPONSE TEXT"], file=discord.File(img), tts=tts)
-#                 os.remove(img) # Deletes the image from local directory
+            # If an image link was specified
+            if img: 
+                response = await message.channel.send(content=element["RESPONSE TEXT"], file=discord.File(img), tts=tts)
+                os.remove(img) # Deletes the image from local directory
 
-#             else:
-#                 response = await message.channel.send(content=element["RESPONSE TEXT"], tts=tts)
+            else:
+                response = await message.channel.send(content=element["RESPONSE TEXT"], tts=tts)
 
-#             print("   [**] The response was successfully sent.")
+            print("   [**] The response was successfully sent.")
 
-#             await reactToResponse(bot, response)
+            await reactToResponse(bot, response)
 
-#             return
+            return
 
-#     await bot.process_commands(message)
+    await bot.process_commands(message)
 
 # Bot's developer
 @bot.command(brief='Desenvolvedor do bot e repositório no GitHub.', aliases=['créditos', 'creditos', 'dev'])
