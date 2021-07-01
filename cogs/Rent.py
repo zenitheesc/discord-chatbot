@@ -65,7 +65,7 @@ class Rent(commands.Cog):
         if time()/3600 - self.time >= 2:
             txt = (f'O tempo de uso da beaglebone expirou <@`{self.rent}`>. Alugue-a novamente caso não existam solicitações de aluguel anteriores.')
             channel = await self.bot.fetch_channel(CHANNEL_ID)
-            await channel.send(context=txt)
+            await channel.send(content=txt)
             self.db.update({"description": "rent"}, {"$set":{"rent": None}})
 
 def setup(bot):
