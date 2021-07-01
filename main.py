@@ -75,7 +75,12 @@ async def on_message(message):
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
-        compareOptions = (str(element[messagAliases]).split('\n')).append(element[messageName])
+        
+        compareOptions = str(element[messagAliases])
+        compareOptions = compareOptions.split('\n')
+        compareOptions.append(element[messageName])
+        print(compareOptions)
+        
         if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
             print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
 
