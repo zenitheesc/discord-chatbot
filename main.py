@@ -68,10 +68,20 @@ async def on_member_join(member):
 @bot.event
 async def on_message(message):
     if message.author == bot.user: return
-    currSheet = commandSheet if(message.content.startswith(">")) else triggerSheet
-    messageLog = "Command" if(message.content.startswith(">")) else "Trigger"
-    messageName = "COMMAND NAME" if(message.content.startswith(">")) else "TRIGGER"
-    messagAliases = "COMMAND ALIASES" if(message.content.startswith(">")) else "TRIGGER ALIASES"
+
+    currSheet = triggerSheet
+    messageLog = "Trigger"
+    messageName = "TRIGGER"
+    messagAliases = "TRIGGER ALIASES"
+
+    if message.content.startswith(">") :
+        
+        currSheet = commandSheet
+        messageLog = "Command"
+        messageName = "COMMAND NAME"
+        messagAliases = "COMMAND ALIASES"
+        message.content.remove(message.content[0])
+
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
@@ -80,7 +90,7 @@ async def on_message(message):
         compareOptions = compareOptions.split('\n')
         compareOptions.append(element[messageName])
         print(compareOptions)
-        
+
         if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
             print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
 
