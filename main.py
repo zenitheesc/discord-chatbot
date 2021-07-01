@@ -69,6 +69,7 @@ async def on_member_join(member):
 async def on_message(message):
     if message.author == bot.user: return
 
+    currMessage = message.content
     currSheet = triggerSheet
     messageLog = "Trigger"
     messageName = "TRIGGER"
@@ -80,7 +81,7 @@ async def on_message(message):
         messageLog = "Command"
         messageName = "COMMAND NAME"
         messageAliases = "COMMAND ALIASES"
-        #message.content = message.content[1:]
+        currMessage = message.content[1:]
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
@@ -89,8 +90,8 @@ async def on_message(message):
         compareOptions = compareOptions.split('\n') if compareOptions != '' else []
         compareOptions.append(element[messageName])
 
-        if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
-            print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
+        if currMessage and currMessage.lower() in filter(lambda e: e, compareOptions):
+            print(f"\n [*] '{messageLog}': '{currMessage}', by {message.author.display_name}.")
 
             await reactToMessage(bot, message, [MESSAGE_EMOJI])
 
