@@ -72,23 +72,25 @@ async def on_message(message):
     currSheet = triggerSheet
     messageLog = "Trigger"
     messageName = "TRIGGER"
-    messagAliases = "TRIGGER ALIASES"
+    messageAliases = "TRIGGER ALIASES"
 
     if message.content.startswith(">") :
         
         currSheet = commandSheet
         messageLog = "Command"
         messageName = "COMMAND NAME"
-        messagAliases = "COMMAND ALIASES"
+        messageAliases = "COMMAND ALIASES"
         message.content[1:]
+        print("é comando")
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
         
-        compareOptions = str(element[messagAliases])
+        compareOptions = str(element[messageAliases])
         compareOptions = compareOptions.split('\n')
         compareOptions.append(element[messageName])
-        print(compareOptions)
+        print("comando", message.content)
+        print("existe", message.content and message.content.lower() in filter(lambda e: e, compareOptions))
 
         if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
             print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
