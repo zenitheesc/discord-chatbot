@@ -41,14 +41,20 @@
 ## Environment and tools
 
 - [Google Sheets](https://www.google.com/sheets/about/): worksheets "commands" and "triggers" (recommended to create "manual").
-- [Python](https://www.python.org/):
-- [Dicord/DeveloperPortal](https://discord.com/developers/applications):
-- [MongoDB](https://www.mongodb.com/):
-- [Heroku](https://www.heroku.com/):
+- [Python](https://www.python.org/)
+- [Dicord/DeveloperPortal](https://discord.com/developers/applications)
+- [MongoDB](https://www.mongodb.com/)
+- [Heroku](https://www.heroku.com/)
 
 ## Steps to run and debug
 
-It's necessary to create a project on Heroku cloud server and import the repository there; to create a database on MongoDB (recommended Atlas) with the desired collections, name your cluster, databases and collection as `discord-bot`; to make spreadsheet with the commands and other with triggers; and start a new application on the [Discord](https://discord.com/developers/applications) to generate your bot.
+It's necessary to create a project on Heroku cloud server and import the repository there; to create a database on MongoDB (recommended Atlas) with the desired collections; to make spreadsheet with the commands and other with triggers; and start a new application on the Discord plataform to generate your bot.
+
+To start, enter [Discord/DeveloperPortal](https://discord.com/developers/applications) and follow the steps described below:   
+In applications, press 'New Application'> Name your bot > Make a description of it > Click in Bot (left bar) and click in 'Add Bot'> Copy the Discord Token and save it in `.env.example` file > In 'OAuth2' (left bar) > Select 'bot' in the scopes > List your permissions and save changes > Use a URL given in the 'scopes' area to open a website > Select which server you want to host the bot commands on. Your Bot is online.
+
+To create a collections in the MongoDB Atlas, you can follow the steps described below:   
+You need create a new project > In this project, create a Cluster > Save the connection URI in the `.env.example` > Click on the "Collections" button on the top bar > + Create Database > Name the database and collection that will be created > Insert Document > You'll initially create three documents for this bot - 1. `byProject` and `byDay` (empty objects); 2. `roles` (empty array); 3. `counters` (object), this object receives the commands keys of `Counters.py` > Cluster, database and collection must be named `discord-bot`
 
 You need these `.env` files to connect all plataforms to run this bot project: a new application token on the Discord Developer Portal; your Google’s API `credentials.env` and `.json` (help in this [video](https://www.youtube.com/watch?v=cnPlKLEGR7E) ); the MongoDB database URI. Replace them properly in the code.
 
