@@ -81,7 +81,6 @@ async def on_message(message):
         messageName = "COMMAND NAME"
         messageAliases = "COMMAND ALIASES"
         message.content = message.content[1:]
-        print("é comando")
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
@@ -89,8 +88,7 @@ async def on_message(message):
         compareOptions = element[messageAliases]
         compareOptions = compareOptions.split('\n') if compareOptions == '' else []
         compareOptions.append(element[messageName])
-        print("comando", message.content)
-        print("existe", message.content and message.content.lower() in filter(lambda e: e, compareOptions))
+        print(compareOptions)
 
         if message.content and message.content.lower() in filter(lambda e: e, compareOptions):
             print(f"\n [*] '{messageLog}': '{message.content}', by {message.author.display_name}.")
