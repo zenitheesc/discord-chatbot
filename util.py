@@ -9,7 +9,8 @@ MESSAGE_EMOJI = '🐴' # emoji that'll be mainly used to react to user messages
 RESPONSE_EMOJI = '🚚' # emoji that'll be used to react to all bot messages
 FIXED_COGS = [ # all cogs that aren't from the google sheet
     'Reuniões', 'OnMemberJoin', 'Decisions',
-    'Counters', 'Utilities', 'Birthday', 'Rent'
+    'Counters', 'Utilities', 'Birthday',
+    'Rent'
 ]
 AVAILABLE_REACTIONS = [ # list of reactions that'll be used in poll-like commands
     '🤠', '🍉', '💘', '🏂',
@@ -25,7 +26,7 @@ VOCATIVES = [ # list of vocatives that'll be used on the welcome message for new
     'querido', 'barbeiro', 'zé', 'filho'
 ]
 
-async def reactToResponse(bot, response, emojiList = []):
+async def reactToResponse(response, emojiList = []):
     if not emojiList: emojiList = []
 
     emojiList.insert(0, RESPONSE_EMOJI)
@@ -37,7 +38,7 @@ async def reactToResponse(bot, response, emojiList = []):
         else:
             print(f"   [**] The reaction {emoji} was successfully added to the response.")
 
-async def reactToMessage(bot, message, emojiList: list):
+async def reactToMessage(message, emojiList: list):
     for emoji in emojiList:
         try:
             await message.add_reaction(emoji)
