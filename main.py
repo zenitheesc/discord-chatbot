@@ -86,7 +86,7 @@ async def on_message(message):
     for element in currSheet:
         
         compareOptions = element[messageAliases]
-        compareOptions = compareOptions.split('\n') if compareOptions == '' else []
+        compareOptions = compareOptions.split('\n') if compareOptions != '' else []
         compareOptions.append(element[messageName])
         print(compareOptions)
 
