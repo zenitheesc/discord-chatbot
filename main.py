@@ -68,10 +68,10 @@ async def on_member_join(member):
 @bot.event
 async def on_message(message):
     if message.author == bot.user: return
-    currSheet = commandSheet if(message.content.startsWith(">")) else triggerSheet
-    messageLog = "Command" if(message.content.startsWith(">")) else "Trigger"
-    messageName = "COMMAND NAME" if(message.content.startsWith(">")) else "TRIGGER"
-    messagAliases = "COMMAND ALIASES" if(message.content.startsWith(">")) else "TRIGGER ALIASES"
+    currSheet = commandSheet if(message.content.startswith(">")) else triggerSheet
+    messageLog = "Command" if(message.content.startswith(">")) else "Trigger"
+    messageName = "COMMAND NAME" if(message.content.startswith(">")) else "TRIGGER"
+    messagAliases = "COMMAND ALIASES" if(message.content.startswith(">")) else "TRIGGER ALIASES"
     # Checks for all triggers listed in the spreadsheet
 
     for element in currSheet:
