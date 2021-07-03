@@ -29,9 +29,9 @@ class Rent(commands.Cog):
 
         await reactToMessage(self.bot, ctx.message, [MESSAGE_EMOJI])
 
-        if self.id == 0:
-            self.db.update_one({"description": "rent"},{"$set":{"discord_id": ctx.message.author.id}})
-            self.db.update_one({"description": "rent"},{"$set":{"rent_time": time()/3600}})
+        if not self.db.find_one(({"description": "rent"}) or self.id == 0:
+            self.db.update_one({"description": "rent"}, upsert=True, {"$set":{"discord_id": ctx.message.author.id}})
+            self.db.update_one({"description": "rent"}, upsert=True, {"$set":{"rent_time": time()/3600}})
             response = await ctx.send(f'A Beaglebone foi alugada com sucesso por `{ctx.author.mention}`, por duas horas a Beaglebone Black estará sobre sua posse')
         else:
             response = await ctx.send(f'A Beaglebone já foi alugada por <@`{self.id}`>, entre em contato com ela/ele ou aguarde o tempo de devolução')
