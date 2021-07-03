@@ -63,10 +63,11 @@ class Rent(commands.Cog):
     @tasks.loop(minutes = 10)
     async def time_expired(self):
         if time()/3600 - self.time >= 2:
-            txt = (f'O tempo de uso da beaglebone expirou <@`{self.id}`>. Alugue-a novamente caso não existam solicitações de aluguel anteriores.')
-            channel = await self.bot.fetch_channel(CHANNEL_ID)
-            await channel.send(content=txt)
-            self.db.update({"description": "rent"}, {"$set":{"discord_id": 0}})
+            if self.id != 0
+                txt = (f'O tempo de uso da beaglebone expirou <@`{self.id}`>. Alugue-a novamente caso não existam solicitações de aluguel anteriores.')
+                channel = await self.bot.fetch_channel(CHANNEL_ID)
+                await channel.send(content=txt)
+                self.db.update({"description": "rent"}, {"$set":{"discord_id": 0}})
 
 def setup(bot):
     bot.add_cog(Rent(bot))
