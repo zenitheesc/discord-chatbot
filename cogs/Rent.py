@@ -29,9 +29,9 @@ class Rent(commands.Cog):
 
         await reactToMessage(self.bot, ctx.message, [MESSAGE_EMOJI])
 
-        if not self.db.find_one(({"description": "rent"}) or self.id == 0:
-            self.db.update_one({"description": "rent"}, upsert=True, {"$set":{"discord_id": ctx.message.author.id}})
-            self.db.update_one({"description": "rent"}, upsert=True, {"$set":{"rent_time": time()/3600}})
+        if not self.db.find_one({"description": "rent"}) or self.id == 0:
+            self.db.update_one({"description": "rent"}, {"$set":{"discord_id": ctx.message.author.id}}, upsert=True)
+            self.db.update_one({"description": "rent"}, {"$set":{"rent_time": time()/3600}}, upsert = True)
             response = await ctx.send(f'A Beaglebone foi alugada com sucesso por `{ctx.author.mention}`, por duas horas a Beaglebone Black estará sobre sua posse')
         else:
             response = await ctx.send(f'A Beaglebone já foi alugada por <@`{self.id}`>, entre em contato com ela/ele ou aguarde o tempo de devolução')
@@ -63,7 +63,7 @@ class Rent(commands.Cog):
     @tasks.loop(minutes = 10)
     async def time_expired(self):
         if time()/3600 - self.time >= 2:
-            if self.id != 0
+            if self.id != 0:
                 txt = (f'O tempo de uso da beaglebone expirou <@`{self.id}`>. Alugue-a novamente caso não existam solicitações de aluguel anteriores.')
                 channel = await self.bot.fetch_channel(CHANNEL_ID)
                 await channel.send(content=txt)
