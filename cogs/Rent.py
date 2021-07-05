@@ -13,14 +13,14 @@ class Rent(commands.Cog):
 
         client = pymongo.MongoClient(MONGODB_ATLAS_URI)
         self.db = client['discord-bot']['discord-bot']
-        self.id = self.db.find_one({"description": "rent"})['discord_id']
-        self.time = self.db.find_one({"description": "rent"})['rent_time']
+        self.id = self.db.find_one({"description": "rent"})['rent']['discord_id']
+        self.time = self.db.find_one({"description": "rent"})['rent']['rent_time']
 
     #A function to register the rent of a beaglebone black for 2 hours
     @commands.command(
         brief='Uma função para alugar a Beaglebone Black de Maíra Canal (gerente do Alto Nível)',
         help='Use o comando >alugar para ter acesso irrestrito durante duas horas a uma Beaglebone Black. Caso alguém já esteja de posse dela, você será avisado/avisada',
-        aliases=['aluguel','aluga','alugar']
+        aliases=['aluguel','aluga']
     )
     async def alugar(self, ctx):
         await ctx.trigger_typing()
