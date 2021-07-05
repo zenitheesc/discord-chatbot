@@ -13,8 +13,8 @@ class Rent(commands.Cog):
 
         client = pymongo.MongoClient(MONGODB_ATLAS_URI)
         self.db = client['discord-bot']['discord-bot']
-        self.id = self.db.find_one({"description": "rent"})['discord_id']
-        self.time = self.db.find_one({"description": "rent"})['rent_time']
+        self.id = self.db.find_one({"description": "rent"})['rent']['discord_id']
+        self.time = self.db.find_one({"description": "rent"})['rent']['rent_time']
 
     #A function to register the rent of a beaglebone black for 2 hours
     @commands.command(
