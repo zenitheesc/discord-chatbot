@@ -30,7 +30,7 @@ def refreshBot():
     global spreadsheet; global commandSheet; global triggerSheet
 
     spreadsheet, commandSheet, triggerSheet, isEmpty = refreshSheet()
-    refreshCogs(bot, commandSheet)
+    refreshCogs(bot)
 
     return isEmpty
 
@@ -45,7 +45,7 @@ async def on_ready():
     periodicRefresh.start()
     print("\n [*] The periodic refresh task was successfully started.")
 
-# Whenever a member joins the server
+# Whenever a member joins the serverpp
 @bot.event
 async def on_member_join(member):
     print(f"\n [*] {member.display_name} has joined the server.")
@@ -249,5 +249,5 @@ async def periodicRefresh():
 
 
 if __name__ == '__main__':
-    refreshCogs(bot, commandSheet, hasLoaded=False)
+    refreshCogs(bot, hasLoaded=False)
     bot.run(DISCORD_TOKEN)
