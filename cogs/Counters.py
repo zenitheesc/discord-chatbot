@@ -1,6 +1,5 @@
 import pymongo
 from discord.ext import commands
-from discord.utils import get
 from util import *
 from config import MONGODB_ATLAS_URI
 
@@ -17,10 +16,9 @@ class Counters(commands.Cog):
     @commands.command(brief='', help='', aliases=[])
     async def júlio(self, ctx):
         await ctx.trigger_typing()
-        channel = ctx.channel
 
         print(f'\n [*] \'>júlio\' command called.')
-   
+
         await reactToMessage(self.bot, ctx.message, [MESSAGE_EMOJI])
 
         # increments that counter and saves it to the db
@@ -46,7 +44,7 @@ class Counters(commands.Cog):
 
         response = await ctx.send(f'*Leonardo* ||Baptistella||, foi preso `{self.counters["bap"]}` vezes.')
 
-        await reactToResponse(self.bot, response, ['🔒'])    
+        await reactToResponse(self.bot, response, ['🔒'])
 
 def setup(bot):
     bot.add_cog(Counters(bot))
