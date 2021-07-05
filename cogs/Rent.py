@@ -20,7 +20,7 @@ class Rent(commands.Cog):
     @commands.command(
         brief='Uma função para alugar a Beaglebone Black de Maíra Canal (gerente do Alto Nível)',
         help='Use o comando >alugar para ter acesso irrestrito durante duas horas a uma Beaglebone Black. Caso alguém já esteja de posse dela, você será avisado/avisada',
-        aliases=['aluguel','aluga']
+        aliases=['aluguel','aluga','alugar']
     )
     async def alugar(self, ctx):
         await ctx.trigger_typing()
